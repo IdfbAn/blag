@@ -83,6 +83,10 @@ def quickstart(args: argparse.Namespace | None) -> None:
         "Author of your website",
         "John Doe",
     )
+    comments = get_input(
+        "Would you like to have comments on articles? (yes or no)",
+        "no",
+    )
 
     config = configparser.ConfigParser()
     config["main"] = {
@@ -90,6 +94,7 @@ def quickstart(args: argparse.Namespace | None) -> None:
         "title": title,
         "description": description,
         "author": author,
+        "comments": comments,
     }
     with open("config.ini", "w") as fh:
         config.write(fh)

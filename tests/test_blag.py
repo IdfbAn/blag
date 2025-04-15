@@ -155,7 +155,7 @@ author = a. u. thor
         assert config_parsed["author"] == "a. u. thor"
 
     # a missing required config causes a sys.exit
-    for x in "base_url", "title", "description", "author":
+    for x in "base_url", "title", "description", "author", "comments":
         config2 = "\n".join(
             [line for line in config.splitlines() if not line.startswith(x)]
         )
@@ -173,6 +173,7 @@ base_url = https://example.com
 title = title
 description = description
 author = a. u. thor
+comments = no
     """
     with TemporaryDirectory() as dir:
         configfile = f"{dir}/config.ini"
@@ -181,6 +182,23 @@ author = a. u. thor
 
         config_parsed = blag.get_config(configfile)
         assert config_parsed["base_url"] == "https://example.com/"
+
+    # comments option is changed to no if invalid
+    config = """
+[main]
+base_url = https://example.com/
+title = title
+description = description
+author = a. u. thor
+comments = asdf
+    """
+    with TemporaryDirectory() as dir:
+        configfile = f"{dir}/config.ini"
+        with open(configfile, "w") as fh:
+            fh.write(config)
+
+        config_parsed = blag.get_config(configfile)
+        assert config_parsed["comments"] == "no"
 
 
 def test_environment_factory(cleandir: str) -> None:

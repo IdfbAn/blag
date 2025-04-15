@@ -161,7 +161,7 @@ def get_config(configfile: str) -> configparser.SectionProxy:
     config = configparser.ConfigParser()
     config.read(configfile)
     # check for the mandatory options
-    for value in "base_url", "title", "description", "author":
+    for value in "base_url", "title", "description", "author", "comments":
         try:
             config["main"][value]
         except Exception:
@@ -171,6 +171,11 @@ def get_config(configfile: str) -> configparser.SectionProxy:
     if not config["main"]["base_url"].endswith("/"):
         logger.warning("base_url does not end with a slash, adding it.")
         config["main"]["base_url"] += "/"
+
+    if (not config["main"]["comments"].lower() == "yes" or
+        not config["main"]["comments"].lower() == "no"):
+        logger.warning("Invalid option for comments, changing to no.")
+        config["main"]["comments"] = "no"
 
     return config["main"]
 
