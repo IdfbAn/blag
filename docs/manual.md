@@ -111,6 +111,27 @@ build/
 ```
 
 
+### Comments
+Since version 2.4, blag has included optional support for anonymous comments
+on articles. <!-- or 3.0? -->
+
+There's one main limitation right now: there are no replies, only top-level
+comments. Support for replies may be added in the future.
+
+During the quickstart, you can choose whether or not to have comments.
+If you change your mind later, you can edit the `comments` setting in
+`config.ini`.
+
+If you disable comments after enabling them, this will not delete the existing
+comments, only hide them and disable creating new ones.
+
+As the blog admin and author, you can delete comments by clicking the icon with
+three dots, and clicking "Delete". You will be asked to confirm that
+you're sure you want to delete the comment.
+
+Comments are stored in a SQLite database file named `comments.db`.
+
+
 ### Static Files
 
 Static files can be put into the `content` directory and will be copied over to

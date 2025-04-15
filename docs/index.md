@@ -16,6 +16,7 @@ blag is named after [the blag of the webcomic xkcd][blagxkcd].
 ## Features
 
 * Write content in [Markdown][]
+* Comments on articles (new in 2.4!) <!-- or 3.0? -->
 * Good looking default theme:
   ![Blag Screenshot](blag.png)
 * Theming support using [Jinja2][] templates
